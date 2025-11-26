@@ -47,6 +47,8 @@ body {
   background: var(--background);
   font-family: var(--font-geist-sans), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
 a {
@@ -59,11 +61,19 @@ a {
   max-width: 480px;
   margin: 0 auto;
   min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
   background: var(--surface);
   display: flex;
   flex-direction: column;
   position: relative;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; /* Ensure no horizontal overflow inside container */
+}
+
+/* Responsive Images */
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Typography */
