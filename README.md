@@ -1,198 +1,161 @@
 # Smart Parking App 🚗
+> **UAS Interaksi Manusia dan Komputer (IMK)**
+> Semester 5 - Smart City Solution
 
-Aplikasi parkir cerdas berbasis Next.js dengan tampilan modern dan interaktif untuk Smart City.
-
-## ✨ Fitur Utama
-
-### 1. **Autentikasi**
-- Login dengan validasi form real-time
-- Register dengan konfirmasi password
-- Persistensi data user menggunakan localStorage
-
-### 2. **Pencarian Lokasi Parkir**
-- Peta interaktif dengan pin lokasi
-- Search bar untuk mencari lokasi
-- Informasi real-time: slot tersedia, harga, jarak
-- Multiple lokasi parkir dengan data dinamis
-
-### 3. **Pemilihan Slot Parkir**
-- Grid view slot parkir per lantai
-- Status real-time (Tersedia/Terisi)
-- Filter berdasarkan lantai
-- Visual indicator untuk slot tersedia
-- Hover effects untuk interaksi yang lebih baik
-
-### 4. **Pembayaran Digital**
-- Multiple metode pembayaran (E-Wallet, QRIS, Kartu)
-- Estimasi durasi parkir (1-5 jam)
-- Kalkulasi harga otomatis
-- Summary pembayaran lengkap
-- Loading state saat processing
-
-### 5. **QR Code Masuk & Keluar**
-- **QR Code Real**: Menggunakan library qrcode.react
-- **Entry QR**: 
-  - Countdown timer 15 menit
-  - Warning visual saat waktu hampir habis
-  - Data booking terenkripsi dalam QR
-- **Exit QR**: 
-  - Kalkulasi durasi parkir otomatis
-  - Total biaya berdasarkan waktu aktual
-  - Animasi success payment
-
-### 6. **Riwayat Transaksi**
-- Daftar lengkap transaksi parkir
-- Detail: lokasi, durasi, harga, metode pembayaran
-- Format tanggal lokal Indonesia
-- Empty state untuk user baru
-- Data tersimpan di localStorage
-
-## 🛠️ Teknologi
-
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Vanilla CSS dengan CSS Variables
-- **Icons**: Lucide React
-- **QR Code**: qrcode.react
-- **Date Handling**: date-fns
-- **State Management**: React Context API
-- **Storage**: localStorage untuk persistensi data
-
-## 🚀 Cara Menjalankan
-
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-2. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
-
-3. **Buka Browser**
-   ```
-   http://localhost:3000
-   ```
-
-## 📱 Alur Aplikasi
-
-1. **Landing Page** → Pilih Login/Register
-2. **Login/Register** → Validasi form → Redirect ke Map
-3. **Map** → Pilih lokasi parkir → Lihat detail → Klik "Lihat Slot"
-4. **Slots** → Pilih lantai → Pilih slot tersedia → Redirect ke Payment
-5. **Payment** → Pilih durasi → Pilih metode → Bayar → Redirect ke Entry QR
-6. **Entry QR** → Scan QR di gate → Klik "Simulasi Keluar" → Redirect ke Exit QR
-7. **Exit QR** → Lihat total biaya → Scan QR keluar → Lihat Riwayat
-8. **History** → Lihat semua transaksi
-
-## 🎨 Fitur Realistis
-
-### State Management
-- Context API untuk global state
-- Data user, booking, dan history tersinkronisasi
-- Automatic save ke localStorage
-
-### Form Validation
-- Email format validation
-- Password strength check
-- Confirm password matching
-- Real-time error messages
-- Visual feedback (border merah untuk error)
-
-### Dynamic Data
-- Slot parkir dengan status real-time
-- Multiple lokasi dengan data berbeda
-- Kalkulasi harga berdasarkan durasi aktual
-- Timer countdown untuk entry ticket
-
-### QR Code
-- QR Code yang bisa di-scan (real QR, bukan icon)
-- Data JSON terenkripsi di dalam QR
-- Berbeda untuk entry dan exit
-- Include booking ID, timestamp, location
-
-### Animations & Transitions
-- Smooth page transitions
-- Hover effects pada cards dan buttons
-- Loading states
-- Success animations
-- Slide-up animations
-
-### UX Enhancements
-- Empty states dengan call-to-action
-- Loading indicators
-- Disabled states untuk buttons
-- Focus states untuk accessibility
-- Responsive design (mobile-first)
-
-## 📊 Data Structure
-
-### User
-```javascript
-{
-  id: string,
-  name: string,
-  email: string
-}
-```
-
-### Booking
-```javascript
-{
-  id: string,
-  location: Location,
-  slot: Slot,
-  paymentMethod: string,
-  entryTime: ISO string,
-  exitTime: ISO string,
-  duration: number (hours),
-  totalPrice: number,
-  status: 'active' | 'completed'
-}
-```
-
-### Location
-```javascript
-{
-  id: number,
-  name: string,
-  address: string,
-  distance: number,
-  availableSlots: number,
-  totalSlots: number,
-  price: number,
-  floors: Floor[]
-}
-```
-
-## 🎯 Best Practices
-
-- **Component Reusability**: BottomNav component digunakan di semua halaman utama
-- **Client-Side Rendering**: Menggunakan 'use client' untuk interaktivitas
-- **Error Handling**: Redirect otomatis jika data tidak lengkap
-- **Data Persistence**: localStorage untuk data yang tidak hilang saat refresh
-- **Responsive Design**: Mobile-first dengan max-width container
-- **Accessibility**: Focus states, semantic HTML, proper labels
-
-## 📝 Notes
-
-- Data parkir adalah mock data untuk demo
-- QR Code bisa di-scan dengan QR scanner real
-- Timer menggunakan real countdown (bukan simulasi)
-- Kalkulasi harga menggunakan waktu aktual (date-fns)
-- Semua form memiliki validasi real-time
-
-## 🔮 Future Enhancements
-
-- Integrasi dengan backend API
-- Real-time slot updates via WebSocket
-- Push notifications untuk reminder
-- Payment gateway integration
-- GPS tracking untuk navigasi
-- Rating & review sistem
-- Loyalty points
-- Multi-language support
+Aplikasi parkir cerdas berbasis web yang dirancang untuk memberikan pengalaman parkir yang seamless, modern, dan efisien. Dibangun menggunakan teknologi web terbaru untuk memenuhi standar antarmuka pengguna (UI) dan pengalaman pengguna (UX) yang baik.
 
 ---
 
-**Dibuat dengan ❤️ untuk Smart City Indonesia**
+## 📋 Daftar Isi
+- [Tentang Proyek](#-tentang-proyek)
+- [Fitur Unggulan](#-fitur-unggulan)
+- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+- [Struktur Folder](#-struktur-folder)
+- [Instalasi dan Menjalankan](#-instalasi-dan-menjalankan)
+- [Panduan Penggunaan Singkat](#-panduan-penggunaan-singkat)
+- [Data & State Management](#-data--state-management)
+- [Pengembang](#-pengembang)
+
+---
+
+## 📖 Tentang Proyek
+
+Smart Parking App adalah solusi digital untuk mengatasi masalah pencarian parkir di area perkotaan. Aplikasi ini memungkinkan pengguna untuk:
+1.  Mencari lokasi parkir terdekat.
+2.  Melihat ketersediaan slot secara *real-time*.
+3.  Melakukan reservasi (booking) slot parkir.
+4.  Melakukan pembayaran non-tunai.
+5.  Masuk dan keluar area parkir menggunakan teknologi QR Code.
+
+Proyek ini dibuat untuk memenuhi tugas **Ujian Akhir Semester (UAS)** mata kuliah **Interaksi Manusia dan Komputer**, dengan fokus pada desain antarmuka yang intuitif dan kemudahan interaksi pengguna.
+
+---
+
+## ✨ Fitur Unggulan
+
+### 1. Autentikasi Pengguna
+- **Register & Login**: Sistem akun yang aman dengan validasi form lengkap.
+- **User Session**: Penyimpanan sesi pengguna agar tidak perlu login berulang kali (menggunakan `localStorage`).
+
+### 2. Peta & Lokasi (Maps)
+- **Interactive Map**: Tampilan peta visual untuk melihat lokasi gedung parkir.
+- **Detail Lokasi**: Informasi lengkap mengenai jarak, harga per jam, dan total slot tersedia.
+
+### 3. Manajemen Slot Parkir
+- **Visualisasi Slot**: Tampilan denah parkir yang realistis (Grid View).
+- **Status Indikator**: Pembedaan warna jelas untuk slot Kosong (Hijau) dan Terisi (Merah).
+- **Multi-floor**: Dukungan untuk gedung parkir bertingkat.
+
+### 4. Sistem Pembayaran & Tiket
+- **Simulasi Payment Gateway**: Mendukung berbagai metode (E-Wallet, QRIS, Kartu).
+- **QR Code Entry/Exit**: Generate QR Code unik yang mengenkripsi data booking untuk keamanan.
+- **Timer Mundur**: Batas waktu check-in untuk mencegah booking palsu.
+
+### 5. Riwayat & Laporan
+- **History Transaksi**: Rekapitulasi penggunaan parkir lengkap dengan tanggal dan biaya.
+- **Status Booking**: Pelacakan status aktif atau selesai.
+
+---
+
+## 🛠 Teknologi yang Digunakan
+
+- **Frontend Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: JavaScript (ES6+)
+- **Styling**: CSS Modules & Global CSS (Responsive Design)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **QR Code**: `qrcode.react` untuk generate QR dinamis.
+- **Date/Time**: `date-fns` untuk manipulasi waktu yang akurat.
+- **State Management**: React Context API (`AuthContext`, `BookingContext`).
+
+---
+
+## 📂 Struktur Folder
+
+Berikut adalah struktur direktori utama proyek ini:
+
+```bash
+smart-parking/
+├── app/
+│   ├── components/      # Komponen UI reusable (Button, Card, Navbar, dll)
+│   ├── context/         # Global State (Auth, Booking)
+│   ├── data/            # Mock Data (Lokasi parkir, user dummy)
+│   ├── entry-qr/        # Halaman QR Code Masuk
+│   ├── exit-qr/         # Halaman QR Code Keluar
+│   ├── home/            # Halaman Dashboard Utama
+│   ├── login/           # Halaman Login
+│   ├── map/             # Halaman Pencarian Lokasi
+│   ├── payment/         # Halaman Pembayaran
+│   ├── slots/           # Halaman Pemilihan Slot
+│   ├── utils/           # Fungsi bantuan (Formatter harga, waktu)
+│   ├── globals.css      # Style global & variabel warna
+│   ├── layout.js        # Layout utama aplikasi
+│   └── page.js          # Landing Page
+├── public/              # Aset statis (Gambar, Icon)
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+---
+
+## 🚀 Instalasi dan Menjalankan
+
+Ikuti langkah-langkah ini untuk menjalankan aplikasi di komputer lokal Anda:
+
+### Prasyarat
+- **Node.js** (Versi 18 atau terbaru disarankan)
+- **npm** (Bawaan Node.js)
+
+### Langkah-langkah
+
+1.  **Clone atau Download Project**
+    Pastikan Anda berada di folder root proyek `smart-parking`.
+
+2.  **Install Dependencies**
+    Buka terminal dan jalankan perintah:
+    ```bash
+    npm install
+    ```
+
+3.  **Jalankan Development Server**
+    Mulai server lokal dengan perintah:
+    ```bash
+    npm run dev
+    ```
+
+4.  **Akses Aplikasi**
+    Buka browser (Chrome/Edge/Firefox) dan kunjungi:
+    ```
+    http://localhost:3000
+    ```
+
+---
+
+## 📱 Panduan Penggunaan Singkat
+
+1.  **Mulai**: Buka aplikasi, klik **"Mulai Sekarang"**.
+2.  **Akun**: Daftar akun baru atau login jika sudah punya.
+3.  **Cari Parkir**: Pilih lokasi parkir dari peta yang tersedia.
+4.  **Pilih Slot**: Pilih lantai dan nomor slot yang berwarna hijau (kosong).
+5.  **Bayar**: Tentukan durasi dan metode pembayaran, lalu selesaikan transaksi.
+6.  **Check-In**: Tunjukkan QR Code yang muncul saat tiba di gerbang masuk.
+7.  **Check-Out**: Saat selesai, masuk ke menu tiket dan lakukan proses keluar (scan QR keluar).
+
+---
+
+## 💾 Data & State Management
+
+Aplikasi ini menggunakan **Client-Side Storage** (`localStorage`) untuk mensimulasikan database.
+- Data user, booking aktif, dan riwayat transaksi **TIDAK AKAN HILANG** saat browser di-refresh.
+- Untuk mereset data (menghapus semua riwayat), Anda dapat menghapus *Local Storage* melalui Developer Tools browser (Application > Local Storage > Clear).
+
+---
+
+## 👨‍💻 Pengembang
+
+**Nama Mahasiswa**  
+*Mahasiswa Semester 5 - Teknik Informatika / Sistem Informasi*  
+*Mata Kuliah: Interaksi Manusia dan Komputer*
+
+---
+*Dibuat dengan ❤️ menggunakan Next.js*
